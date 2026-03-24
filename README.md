@@ -1,3 +1,3 @@
 # Morris-Harrison.github.io
 
-MY Photoshoot Website
+My Photoshoot Website
