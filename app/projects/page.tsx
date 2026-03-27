@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { AuroraBackground } from "../components/AuroraBackground";
 
 interface Project {
   id: string;
@@ -15,6 +16,7 @@ interface Project {
   link?: string;
   gif?: string;
   featured?: boolean;
+  new_feature?: boolean;
 }
 
 export default function Projects() {
@@ -42,8 +44,9 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <Navbar />
+    <AuroraBackground showRadialGradient={true} animationSpeed={15}>
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 w-full">
+        <Navbar />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center px-6 pt-20">
@@ -55,8 +58,8 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* Projects Grid Section */}
-      <section className="min-h-screen flex items-center px-6 py-20">
+        {/* Projects Grid Section */}
+        <section className="min-h-screen flex items-center px-6 py-20">
         <div className="max-w-4xl mx-auto w-full">
           <h2 className="text-5xl font-bold text-white mb-12">Featured Projects</h2>
           {loading && (
@@ -138,10 +141,11 @@ export default function Projects() {
             ))}
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </AuroraBackground>
   );
 }
