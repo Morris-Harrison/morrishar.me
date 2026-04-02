@@ -30,7 +30,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link href="/skills" className="text-slate-300 hover:text-white transition font-medium">
-            Skills
+            Skillset
           </Link>
           <Link href="/projects" className="text-slate-300 hover:text-white transition font-medium">
             Projects

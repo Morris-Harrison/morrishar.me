@@ -68,34 +68,67 @@ export default function Projects() {
             {/* Filter Buttons */}
             {!loading && projects.length > 0 && (
               <div className="mb-8 space-y-4">
-                {/* Category Filter */}
-                {categories.length > 0 && (
+                {/* Category + Feature Filter */}
+                {(categories.length > 0 || hasNewFeatures || hasFeatured) && (
                   <div>
                     <p className="text-slate-400 text-sm mb-2">Category:</p>
                     <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => setSelectedCategory(null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                          selectedCategory === null
-                            ? "bg-blue-600 text-white"
-                            : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                        }`}
-                      >
-                        All
-                      </button>
-                      {categories.map((cat) => (
-                        <button
-                          key={cat}
-                          onClick={() => setSelectedCategory(cat)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                            selectedCategory === cat
-                              ? "bg-blue-600 text-white"
-                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                          }`}
-                        >
-                          {cat}
-                        </button>
-                      ))}
+                      {categories.length > 0 && (
+                        <>
+                          <button
+                            onClick={() => setSelectedCategory(null)}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                              selectedCategory === null
+                                ? "bg-blue-600 text-white"
+                                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                            }`}
+                          >
+                            All Categories
+                          </button>
+                          {categories.map((cat) => (
+                            <button
+                              key={cat}
+                              onClick={() => setSelectedCategory(cat)}
+                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                                selectedCategory === cat
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                              }`}
+                            >
+                              {cat}
+                            </button>
+                          ))}
+                        </>
+                      )}
+
+                      {(hasNewFeatures || hasFeatured) && (
+                        <>
+                          {hasNewFeatures && (
+                            <button
+                              onClick={() => setSelectedFeature("new")}
+                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                                selectedFeature === "new"
+                                  ? "bg-green-600 text-white"
+                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                              }`}
+                            >
+                              New Features
+                            </button>
+                          )}
+                          {hasFeatured && (
+                            <button
+                              onClick={() => setSelectedFeature("featured")}
+                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
+                                selectedFeature === "featured"
+                                  ? "bg-yellow-600 text-white"
+                                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                              }`}
+                            >
+                              Featured
+                            </button>
+                          )}
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
@@ -107,7 +140,7 @@ export default function Projects() {
                     <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => setSelectedLanguage(null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
                           selectedLanguage === null
                             ? "bg-blue-600 text-white"
                             : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -119,7 +152,7 @@ export default function Projects() {
                         <button
                           key={lang}
                           onClick={() => setSelectedLanguage(lang)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${
                             selectedLanguage === lang
                               ? "bg-blue-600 text-white"
                               : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -132,48 +165,6 @@ export default function Projects() {
                   </div>
                 )}
 
-                {/* Feature Filter */}
-                {(hasNewFeatures || hasFeatured) && (
-                  <div>
-                    <p className="text-slate-400 text-sm mb-2">Features:</p>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => setSelectedFeature(null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                          selectedFeature === null
-                            ? "bg-blue-600 text-white"
-                            : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                        }`}
-                      >
-                        All
-                      </button>
-                      {hasNewFeatures && (
-                        <button
-                          onClick={() => setSelectedFeature("new")}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                            selectedFeature === "new"
-                              ? "bg-green-600 text-white"
-                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                          }`}
-                        >
-                          New Features
-                        </button>
-                      )}
-                      {hasFeatured && (
-                        <button
-                          onClick={() => setSelectedFeature("featured")}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                            selectedFeature === "featured"
-                              ? "bg-yellow-600 text-white"
-                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                          }`}
-                        >
-                          Featured
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                )}
               </div>
             )}
             {loading ? (

@@ -34,8 +34,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Arsenal', sans-serif;
-  /* Keep vertical scrollbar space reserved to avoid layout shift on load */
-  overflow-y: scroll;
+  /* Start with scrolling fully disabled; pages will re-enable via JS when appropriate */
+  overflow-y: hidden;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -44,6 +44,19 @@ body {
 html {
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+
+/* Hide scrollbar visuals but preserve scrolling behavior */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @keyframes cursor-blink {

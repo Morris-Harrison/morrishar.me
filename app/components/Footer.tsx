@@ -8,10 +8,8 @@ interface FooterProps {
 }
 
 export default function Footer({
-  github = "https://github.com/morrisharrison",
-  linkedin = "https://linkedin.com/in/morrisharrison",
-  twitter = "https://twitter.com/morrisharrison",
-  email = "morris@example.com",
+  github = "https://github.com/morris-harrison",
+  email = "mailto:morriskharrison@outlook.com",
 }: FooterProps) {
   return (
     <footer className="bg-black border-t border-white/30 py-4 mt-10">
@@ -19,6 +17,16 @@ export default function Footer({
         <div className="flex flex-col items-center justify-center gap-4">
           {/* Social Media Icons */}
           <div className="flex gap-6">
+            
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                className="text-slate-400 hover:text-blue-400 transition text-2xl"
+                aria-label="Email"
+              >
+                <FaEnvelope />
+              </a>
+            )}
             {github && (
               <a
                 href={github}
@@ -28,37 +36,6 @@ export default function Footer({
                 aria-label="GitHub"
               >
                 <FaGithub />
-              </a>
-            )}
-            {linkedin && (
-              <a
-                href={linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-blue-400 transition text-2xl"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
-              </a>
-            )}
-            {twitter && (
-              <a
-                href={twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-blue-400 transition text-2xl"
-                aria-label="Twitter"
-              >
-                <FaTwitter />
-              </a>
-            )}
-            {email && (
-              <a
-                href={`mailto:${email}`}
-                className="text-slate-400 hover:text-blue-400 transition text-2xl"
-                aria-label="Email"
-              >
-                <FaEnvelope />
               </a>
             )}
           </div>

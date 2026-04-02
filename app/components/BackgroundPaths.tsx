@@ -63,7 +63,7 @@ export interface BackgroundPathsProps {
 
 export function BackgroundPaths({ className, children }: BackgroundPathsProps) {
   return (
-    <div className={cn("fixed inset-0 overflow-hidden bg-neutral-950 text-white", className)}>
+    <div className={cn("fixed inset-0 overflow-hidden bg-black text-white", className)}>
       {/* Mirrored path sets for symmetry */}
       <FloatingPaths position={1} />
       <FloatingPaths position={-1} />

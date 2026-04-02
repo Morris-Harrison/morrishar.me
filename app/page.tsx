@@ -25,19 +25,149 @@ const Typewriter = dynamic(() => import("react-typewriter-effect"), {
   ssr: false,
 });
 
+const TITLE_SPEED = 100;
+const SUBTITLE_SPEED = 16;
+// About typewriter delay in ms per character (slightly faster than before)
+const ABOUT_BODY_SPEED = 24;
+
+const SUBTITLE_TEXT =
+  "A Software Developer from Nanaimo BC Specializing" +
+  "\n" +
+  "in IT Infrastructure and Personalized Websites.";
+
+const ABOUT_TOKENS = [
+  {
+    type: "text" as const,
+    text:
+      "I am a First Year Student Pursuing my BCs in Computer Science. I utilize the MERN, MEAN, and T3 Stacks to deliver Beautiful Full Stack Websites. Check out my ",
+  },
+  {
+    type: "link" as const,
+    text: "Open Source Projects",
+    href: "/projects",
+  },
+  {
+    type: "text" as const,
+    text: " and my Complete ",
+  },
+  {
+    type: "link" as const,
+    text: "Skillset",
+    href: "/skills",
+  },
+  {
+    type: "text" as const,
+    text: ", feel free to ",
+  },
+  {
+    type: "link" as const,
+    text: "Contact me",
+    href: "/#contact",
+  },
+  {
+    type: "text" as const,
+    text: " for any Freelance inquiries.",
+  },
+];
+
+const ABOUT_TOTAL_LENGTH = ABOUT_TOKENS.reduce(
+  (sum, token) => sum + token.text.length,
+  0,
+);
+
+function renderAboutTyped(visibleChars: number) {
+  let remaining = visibleChars;
+  const parts: React.ReactNode[] = [];
+
+  for (let i = 0; i < ABOUT_TOKENS.length && remaining > 0; i++) {
+    const token = ABOUT_TOKENS[i];
+    const take = Math.min(remaining, token.text.length);
+    const shown = token.text.slice(0, take);
+    remaining -= take;
+    if (!shown) continue;
+
+    if (token.type === "text") {
+      parts.push(shown);
+    } else {
+      parts.push(
+        <Link
+          key={`${token.href}-${i}`}
+          href={token.href}
+          className="text-blue-400"
+        >
+          {shown}
+        </Link>,
+      );
+    }
+  }
+
+  return <>{parts}</>;
+}
+
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [titleDone, setTitleDone] = useState(false);
+  const [subtitleDone, setSubtitleDone] = useState(false);
+  const [aboutChars, setAboutChars] = useState(0);
 
   // Approximate when the title typewriter has finished so we can trigger the subtitle
   useEffect(() => {
     const titleText = "Hi, I'm Morris";
-    const typeSpeedMs = 100;
+    const typeSpeedMs = TITLE_SPEED;
     const totalDuration = titleText.length * typeSpeedMs;
     const timeout = setTimeout(() => setTitleDone(true), totalDuration + 200);
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (!titleDone) return;
+
+    const totalDuration = SUBTITLE_TEXT.length * SUBTITLE_SPEED;
+    const timeout = setTimeout(() => setSubtitleDone(true), totalDuration + 200);
+    return () => clearTimeout(timeout);
+  }, [titleDone]);
+
+  useEffect(() => {
+    if (!subtitleDone) return;
+
+    setAboutChars(0);
+    const interval = setInterval(() => {
+      setAboutChars(prev => {
+        if (prev >= ABOUT_TOTAL_LENGTH) {
+          clearInterval(interval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, ABOUT_BODY_SPEED);
+
+    return () => clearInterval(interval);
+  }, [subtitleDone]);
+
+  const aboutDone = aboutChars >= ABOUT_TOTAL_LENGTH;
+
+  // Lock scrolling on the home page until the About text has fully typed
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const htmlEl = document.documentElement;
+    const previousBody = document.body.style.overflow;
+    const previousHtml = htmlEl.style.overflow;
+
+    if (!aboutDone) {
+      document.body.style.overflow = "hidden";
+      htmlEl.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      htmlEl.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = previousBody;
+      htmlEl.style.overflow = previousHtml;
+    };
+  }, [aboutDone]);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -67,18 +197,14 @@ export default function Home() {
               <div className="w-full md:w-2/3">
                 <div className="w-full max-w-5xl rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
                   <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 flex items-baseline gap-2 whitespace-nowrap">
-                    <Typewriter text="Hi, I'm Morris" typeSpeed={100} cursor={false} />
+                    <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />
                     <span className={titleDone ? "cursor-blink-slow" : "cursor-blink-fast"}>_</span>
                   </h1>
                   <div className="text-xl md:text-2xl text-slate-200 max-w-none whitespace-pre-line min-h-[4.5rem]">
                     {titleDone && (
                       <Typewriter
-                        text={
-                          "A Software Developer from Nanaimo BC Specializing" +
-                          "\n" +
-                          "in IT Infrastructure and Personalized Websites."
-                        }
-                        typeSpeed={16}
+                        text={SUBTITLE_TEXT}
+                        typeSpeed={SUBTITLE_SPEED}
                         cursor={false}
                       />
                     )}
@@ -91,9 +217,10 @@ export default function Home() {
                     src="/morrisharrison.jpg"
                     alt="Morris Harrison"
                     fill
-                    className="rounded-full object-cover border-4 border-black shadow-2xl shadow-blue-500/20"
+                    className="rounded-full object-cover shadow-2xl shadow-blue-500/20"
                     priority
                   />
+                  <div className="pointer-events-none absolute inset-0 rounded-full border-[3px] border-white border-t-transparent" />
                 </div>
               </div>
             </div>
@@ -102,22 +229,21 @@ export default function Home() {
 
         <section className="px-6 pt-4 pb-16 -mt-10 md:-mt-16">
           <div className="max-w-3xl mx-auto w-full">
-            <div className="inline-block w-full text-center space-y-4 rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
-              <h2 className="text-4xl md:text-5xl font-bold text-white">About Me</h2>
-              <p className="text-lg md:text-xl text-slate-200">
-                I use the MERN, MEAN, and -- stacks to deliver beautiful full stack websites. I am currently a first year student at VIU  BCs in Computer Science check out my Projects here and my Skills here, open to freelance work, contact here.
-              </p>
+            <div className="inline-block w-full space-y-4 rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/95 to-black/40 h-[130px] overflow-hidden">
+              <div className="text-lg md:text-xl text-slate-100 text-left">
+                {subtitleDone && <p>{renderAboutTyped(aboutChars)}</p>}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="px-6 py-20">
-          <div className="max-w-4xl mx-auto w-full">
-            <div className="inline-block rounded-xl px-4 py-3 mb-12 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
-              <h2 className="text-5xl font-bold text-white">Featured Projects</h2>
+        <section className="px-6 py-12 -mt-16">
+          <div className="max-w-4xl mx-auto w-full text-center">
+            <div className="inline-block rounded-xl px-4 py-3 mt-6 mb-12 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
+              <h2 className="text-5xl font-bold text-white text-center">Featured Projects</h2>
             </div>
             {!loading && projects.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
                 {projects.map((project) => (
                   <div
                     key={project.id}
