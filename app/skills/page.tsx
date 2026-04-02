@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaPython, FaJs, FaNode } from "react-icons/fa";
+import { FaPython, FaJs, FaNode, FaEnvelope, FaGithub } from "react-icons/fa";
 import { SiTypescript, SiDjango, SiPostgresql, SiMongodb } from "react-icons/si";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -153,7 +153,7 @@ export default function Skills() {
         </section>
 
         {/* Tools & Soft Skills Section */}
-        <section className="px-6 py-20">
+        <section className="px-6 pt-20 pb-0">
           <div className="max-w-4xl mx-auto w-full">
             <h2 className="text-5xl font-bold text-white mb-12">Tools & Skills</h2>
             <div className="space-y-8">
@@ -259,6 +259,37 @@ export default function Skills() {
                   Problem-solving, communication, teamwork, project management, code review, 
                   mentoring, and a strong commitment to continuous learning and improvement.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact icons below skills, matching projects/home Keep in Touch */}
+        <section className="px-6 pb-0">
+          <div className="max-w-4xl mx-auto w-full">
+            <div className="text-center">
+              <div className="inline-block mt-[60px] mb-[30px] rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
+                <div className="text-slate-100 italic text-4xl text-center mb-3">
+                  Keep in Touch
+                </div>
+                <div className="flex items-center justify-center gap-6">
+                  <a
+                    href="mailto:morriskharrison@outlook.com"
+                    className="text-white hover:text-blue-400 transition text-2xl"
+                    aria-label="Email"
+                  >
+                    <FaEnvelope />
+                  </a>
+                  <a
+                    href="https://github.com/morris-harrison"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-blue-400 transition text-2xl"
+                    aria-label="GitHub"
+                  >
+                    <FaGithub />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

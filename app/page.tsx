@@ -216,7 +216,10 @@ export default function Home() {
                 <div className="w-full max-w-5xl rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
                   <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 flex items-baseline gap-2 whitespace-nowrap">
                     {fromNav ? (
-                      "Hi, I'm Morris _"
+                      <>
+                        <span>Hi, I'm Morris</span>
+                        <span className={titleDone ? "cursor-blink-slow" : "cursor-blink-fast"}>_</span>
+                      </>
                     ) : (
                       <>
                         <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />

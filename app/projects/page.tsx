@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaEnvelope } from "react-icons/fa";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { LightWavesBackground } from "../components/LightWavesBackground";
@@ -57,13 +58,29 @@ export default function Projects() {
     return matchesCategory && matchesLanguage && matchesFeature;
   });
 
+  const featureLabel =
+    selectedFeature === "featured"
+      ? "Featured"
+      : selectedFeature === "new"
+      ? "New Feature"
+      : "";
+
+  let headingTitle = "All Projects";
+  if (selectedCategory || selectedLanguage || selectedFeature) {
+    const parts: string[] = [];
+    if (featureLabel) parts.push(featureLabel);
+    if (selectedCategory) parts.push(selectedCategory);
+    if (selectedLanguage) parts.push(selectedLanguage);
+    headingTitle = `${parts.join(" ")} Projects`;
+  }
+
   return (
     <LightWavesBackground>
-      <div className="relative z-10 bg-transparent w-full">
+      <div className="relative z-10 bg-transparent w-full min-h-screen flex flex-col">
         <Navbar />
-        <section className="px-6 py-20">
+        <section className="px-6 pt-20 pb-0 flex-1">
           <div className="max-w-4xl mx-auto w-full">
-            <h2 className="text-5xl font-bold text-white mb-12">All Projects</h2>
+            <h2 className="text-5xl font-bold text-white mb-12">{headingTitle}</h2>
             
             {/* Filter Buttons */}
             {!loading && projects.length > 0 && (
@@ -172,7 +189,7 @@ export default function Projects() {
                 <p className="text-slate-400 text-xl">Loading projects...</p>
               </div>
             ) : filteredProjects.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-9">
                 {filteredProjects.map((project) => (
                   <div
                     key={project.id}
@@ -238,6 +255,33 @@ export default function Projects() {
                 )}
               </div>
             )}
+
+            {/* Contact icons below projects, matching home page */}
+            <div className="text-center pt-[30px] pb-[30px]">
+              <div className="inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
+                <div className="text-slate-100 italic text-4xl text-center mb-3">
+                  Keep in Touch
+                </div>
+                <div className="flex items-center justify-center gap-6">
+                  <a
+                    href="mailto:morriskharrison@outlook.com"
+                    className="text-white hover:text-blue-400 transition text-2xl"
+                    aria-label="Email"
+                  >
+                    <FaEnvelope />
+                  </a>
+                  <a
+                    href="https://github.com/morris-harrison"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-blue-400 transition text-2xl"
+                    aria-label="GitHub"
+                  >
+                    <FaGithub />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         <Footer />

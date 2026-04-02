@@ -49,6 +49,7 @@ export function LightWavesBackground({
   const wavesRef = useRef<Wave[]>([])
   const animationRef = useRef<number>()
   const startTimeRef = useRef(Date.now())
+  const initializedRef = useRef(false)
 
   const initWaves = useCallback(
     (height: number) => {
@@ -88,7 +89,13 @@ export function LightWavesBackground({
       height = rect.height
       canvas.width = width
       canvas.height = height
-      initWaves(height)
+      // Initialize wave positions only once to avoid "refreshing" the
+      // background pattern every time the content height changes (e.g. when
+      // filters are applied on the projects page).
+      if (!initializedRef.current) {
+        initWaves(height)
+        initializedRef.current = true
+      }
     }
     updateSize()
 
@@ -100,9 +107,9 @@ export function LightWavesBackground({
 
       // Dark gradient background
       const bgGradient = ctx.createLinearGradient(0, 0, 0, height)
-      bgGradient.addColorStop(0, "#030712")
-      bgGradient.addColorStop(0.5, "#0a0f1a")
-      bgGradient.addColorStop(1, "#030712")
+      bgGradient.addColorStop(0, "#1f2850")
+      bgGradient.addColorStop(0.5, "#1f2850")
+      bgGradient.addColorStop(1, "#1f2850")
       ctx.fillStyle = bgGradient
       ctx.fillRect(0, 0, width, height)
 
@@ -214,7 +221,7 @@ export function LightWavesBackground({
   }, [colors, speed, intensity, initWaves])
 
   return (
-    <div className={cn("relative min-h-screen w-full", className)}>
+    <div className={cn("relative min-h-screen w-full bg-[#1f2850]", className)}>
       <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
