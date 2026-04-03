@@ -261,7 +261,7 @@ export default function Skills() {
                 })}
               </div>
               <p className="text-slate-400 text-lg leading-relaxed text-center">
-                No-SQL Databases through MongoDB Atlas, often occompanied by Prisma, and MySQL Databases via HeidiSQL
+                No-SQL Databases through MongoDB Atlas, often accompanied by Prisma, and MySQL Databases via HeidiSQL
               </p>
             </div>
           </div>
