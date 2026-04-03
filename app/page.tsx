@@ -207,7 +207,7 @@ function HomeContent() {
         const response = await fetch("/api/projects");
         if (response.ok) {
           const data = await response.json();
-          setProjects(data.filter((p: Project) => p.featured));
+          setProjects(data.filter((p: Project) => p.new_feature));
         }
       } catch (err) {
         // ignore

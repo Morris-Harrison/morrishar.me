@@ -18,7 +18,6 @@ interface Project {
   language?: string;
   link?: string;
   gif?: string;
-  featured?: boolean;
   new_feature?: boolean;
 }
 
@@ -27,7 +26,6 @@ export default function Projects() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
-  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -48,34 +46,22 @@ export default function Projects() {
 
   const categories = Array.from(new Set(projects.map((p) => p.category).filter(Boolean))) as string[];
   const languages = Array.from(new Set(projects.map((p) => p.language).filter(Boolean))) as string[];
-  const hasNewFeatures = projects.some((p) => p.new_feature);
 
   const filteredProjects = projects.filter((project) => {
     const matchesCategory = !selectedCategory || project.category === selectedCategory;
     const matchesLanguage = !selectedLanguage || project.language === selectedLanguage;
-    const matchesFeature = !selectedFeature || 
-      (selectedFeature === "new" && project.new_feature) ||
-      (selectedFeature === "featured" && project.featured);
-    return matchesCategory && matchesLanguage && matchesFeature;
+    return matchesCategory && matchesLanguage;
   });
 
   const sortedProjects = [...filteredProjects].sort((a, b) => {
-    const aFeatured = a.featured ? 1 : 0;
-    const bFeatured = b.featured ? 1 : 0;
+    const aFeatured = a.new_feature ? 1 : 0;
+    const bFeatured = b.new_feature ? 1 : 0;
     return bFeatured - aFeatured;
   });
 
-  const featureLabel =
-    selectedFeature === "featured"
-      ? "Featured"
-      : selectedFeature === "new"
-      ? "New Feature"
-      : "";
-
   let headingTitle = "All Projects";
-  if (selectedCategory || selectedLanguage || selectedFeature) {
+  if (selectedCategory || selectedLanguage) {
     const parts: string[] = [];
-    if (featureLabel) parts.push(featureLabel);
     if (selectedCategory) parts.push(selectedCategory);
     if (selectedLanguage) parts.push(selectedLanguage);
     headingTitle = `${parts.join(" ")} Projects`;
@@ -95,47 +81,30 @@ export default function Projects() {
             {/* Filter Buttons */}
             {!loading && projects.length > 0 && (
               <div className="mb-8 space-y-4">
-                {/* Category + Feature Filter */}
-                {(categories.length > 0 || hasNewFeatures) && (
+                {/* Category Filter */}
+                {categories.length > 0 && (
                   <div>
                     <p className="text-slate-400 text-sm mb-2 cursor-default">Category:</p>
                     <div className="flex flex-wrap gap-2">
-                      {categories.length > 0 && (
-                        <>
-                          <GlassButton
-                            onClick={() => setSelectedCategory(null)}
-                            selected={selectedCategory === null}
-                          >
-                            All Categories
-                          </GlassButton>
-                          {categories.map((cat) => (
-                            <GlassButton
-                              key={cat}
-                              onClick={() =>
-                                setSelectedCategory((current) =>
-                                  current === cat ? null : cat
-                                )
-                              }
-                              selected={selectedCategory === cat}
-                            >
-                              {cat}
-                            </GlassButton>
-                          ))}
-                        </>
-                      )}
-
-                      {hasNewFeatures && (
+                      <GlassButton
+                        onClick={() => setSelectedCategory(null)}
+                        selected={selectedCategory === null}
+                      >
+                        All Categories
+                      </GlassButton>
+                      {categories.map((cat) => (
                         <GlassButton
+                          key={cat}
                           onClick={() =>
-                            setSelectedFeature((current) =>
-                              current === "new" ? null : "new"
+                            setSelectedCategory((current) =>
+                              current === cat ? null : cat
                             )
                           }
-                          selected={selectedFeature === "new"}
+                          selected={selectedCategory === cat}
                         >
-                          New Features
+                          {cat}
                         </GlassButton>
-                      )}
+                      ))}
                     </div>
                   </div>
                 )}
@@ -195,7 +164,7 @@ export default function Projects() {
                         <h3 className="text-xl font-bold text-white">
                           {project.title}
                         </h3>
-                        {project.featured && (
+                        {project.new_feature && (
                           <span className="bg-blue-500/30 text-blue-300 px-2 py-1 rounded text-xs font-semibold cursor-default">
                             Featured
                           </span>
