@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Morris Harrison - Software Developer Portfolio",
+  title: "Morris Harrison",
   description: "Developer Portfolio",
   icons: {
     icon: "/favicon.ico",

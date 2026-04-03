@@ -95,6 +95,20 @@ function renderAboutTyped(visibleChars: number) {
           key={`${token.href}-${i}`}
           href={token.href}
           className="text-blue-400"
+          onClick={(e) => {
+            if (token.href === "/#contact" && typeof window !== "undefined") {
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                const scrollHeight =
+                  document.documentElement.scrollHeight || document.body.scrollHeight;
+                window.scrollTo({
+                  top: scrollHeight,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }
+            }
+          }}
         >
           {shown}
         </Link>,
@@ -333,7 +347,10 @@ function HomeContent() {
             )}
 
             {/* Contact icons below featured projects */}
-            <div className="mt-6 mb-[20px] inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
+            <div
+              id="contact"
+              className="mt-6 mb-[20px] inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40"
+            >
               <div className="text-slate-100 italic text-4xl text-center mb-3 cursor-default">
                 Keep in Touch
               </div>

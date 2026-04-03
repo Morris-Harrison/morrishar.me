@@ -18,7 +18,7 @@ export default function Skills() {
         { name: "Next", icon: "/next.svg" },
         { name: "Node", icon: "/node.svg" },
         { name: "Express", icon: "/express.svg" }, 
-        { name: "Three JS", icon: "/threejs-logo.svg" },
+        { name: "Three JS", icon: "/three.svg" },
         { name: "Vite", icon: "/vite.svg" },
         { name: "shadcn", icon: "/shadcn.svg" },
         { name: "Tailwind", icon: "/tailwind-svgrepo-com.svg" },
@@ -85,8 +85,8 @@ export default function Skills() {
   ];
 
   const aiAgents = [
-    { name: "Claude Sonnet/Haiku 5", icon: "/claude-color.svg" },
-    { name: "Perplexity", icon: "/perplexity-color.svg" },
+    { name: "Claude Sonnet", icon: "/claude-color.svg" },
+    { name: "Perplexity Sonar", icon: "/perplexity-color.svg" },
     { name: "Copilot Student", icon: "/github-copilot.svg" },
     { name: "Ollama", icon: "/ollama-icon.svg" },
     { name: "GPT 5", icon: "/gpt.svg" },
