@@ -40,7 +40,7 @@ const ABOUT_TOKENS = [
   {
     type: "text" as const,
     text:
-      "I am a First Year Student Pursuing my BCs in Computer Science. I utilize the MERN, MEAN, and T3 Stacks to deliver Beautiful Full Stack Websites. Check out my ",
+      "I am a First Year Student Pursuing my Bachelor's degree in Computer Science. I utilize the MERN, MEAN, and T3 Stacks to deliver Beautiful Full Stack Websites. Check out my ",
   },
   {
     type: "link" as const,
