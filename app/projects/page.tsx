@@ -7,6 +7,8 @@ import { FaGithub, FaEnvelope } from "react-icons/fa";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { LightWavesBackground } from "../components/LightWavesBackground";
+import { GlassButton } from "../components/ui/glass-button";
+import { RippleButton } from "@/components/ui/ripple-button";
 
 interface Project {
   id: string;
@@ -86,7 +88,7 @@ export default function Projects() {
         <section className="px-6 pt-20 pb-0 flex-1">
           <div className="max-w-4xl mx-auto w-full">
             <h2 className="text-5xl font-bold text-white mb-2">{headingTitle}</h2>
-            <p className="text-slate-400 text-lg mb-10">
+            <p className="text-slate-400 text-lg mb-10 cursor-default">
               All of my Projects are Open-Source Live Websites or Applications Available for Download.
             </p>
             
@@ -96,53 +98,43 @@ export default function Projects() {
                 {/* Category + Feature Filter */}
                 {(categories.length > 0 || hasNewFeatures) && (
                   <div>
-                    <p className="text-slate-400 text-sm mb-2">Category:</p>
+                    <p className="text-slate-400 text-sm mb-2 cursor-default">Category:</p>
                     <div className="flex flex-wrap gap-2">
                       {categories.length > 0 && (
                         <>
-                          <button
+                          <GlassButton
                             onClick={() => setSelectedCategory(null)}
-                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
-                              selectedCategory === null
-                                ? "bg-blue-600 text-white"
-                                : "bg-black text-white"
-                            }`}
+                            selected={selectedCategory === null}
                           >
                             All Categories
-                          </button>
+                          </GlassButton>
                           {categories.map((cat) => (
-                            <button
+                            <GlassButton
                               key={cat}
                               onClick={() =>
                                 setSelectedCategory((current) =>
                                   current === cat ? null : cat
                                 )
                               }
-                              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
-                                selectedCategory === cat
-                                  ? "bg-blue-600 text-white"
-                                  : "bg-black text-white"
-                              }`}
+                              selected={selectedCategory === cat}
                             >
                               {cat}
-                            </button>
+                            </GlassButton>
                           ))}
                         </>
                       )}
 
                       {hasNewFeatures && (
-                        <>
-                          <button
-                            onClick={() => setSelectedFeature("new")}
-                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
-                              selectedFeature === "new"
-                                ? "bg-blue-600 text-white"
-                                : "bg-black text-white"
-                            }`}
-                          >
-                            New Features
-                          </button>
-                        </>
+                        <GlassButton
+                          onClick={() =>
+                            setSelectedFeature((current) =>
+                              current === "new" ? null : "new"
+                            )
+                          }
+                          selected={selectedFeature === "new"}
+                        >
+                          New Features
+                        </GlassButton>
                       )}
                     </div>
                   </div>
@@ -151,34 +143,26 @@ export default function Projects() {
                 {/* Language Filter */}
                 {languages.length > 0 && (
                   <div>
-                    <p className="text-slate-400 text-sm mb-2">Language:</p>
+                    <p className="text-slate-400 text-sm mb-2 cursor-default">Language:</p>
                     <div className="flex flex-wrap gap-2">
-                      <button
+                      <GlassButton
                         onClick={() => setSelectedLanguage(null)}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
-                          selectedLanguage === null
-                            ? "bg-blue-600 text-white"
-                            : "bg-black text-white"
-                        }`}
+                        selected={selectedLanguage === null}
                       >
                         All
-                      </button>
+                      </GlassButton>
                       {languages.map((lang) => (
-                        <button
+                        <GlassButton
                           key={lang}
                           onClick={() =>
                             setSelectedLanguage((current) =>
                               current === lang ? null : lang
                             )
                           }
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ring-offset-background hover:ring-primary/90 hover:ring-2 hover:ring-offset-2 ${
-                            selectedLanguage === lang
-                              ? "bg-blue-600 text-white"
-                              : "bg-black text-white"
-                          }`}
+                          selected={selectedLanguage === lang}
                         >
                           {lang}
-                        </button>
+                        </GlassButton>
                       ))}
                     </div>
                   </div>
@@ -188,7 +172,7 @@ export default function Projects() {
             )}
             {loading ? (
               <div className="text-center py-12">
-                <p className="text-slate-400 text-xl">Loading projects...</p>
+                <p className="text-slate-400 text-xl cursor-default">Loading projects...</p>
               </div>
             ) : sortedProjects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-9">
@@ -212,36 +196,42 @@ export default function Projects() {
                           {project.title}
                         </h3>
                         {project.featured && (
-                          <span className="bg-blue-500/30 text-blue-300 px-2 py-1 rounded text-xs font-semibold">
+                          <span className="bg-blue-500/30 text-blue-300 px-2 py-1 rounded text-xs font-semibold cursor-default">
                             Featured
                           </span>
                         )}
                       </div>
-                      <p className="text-slate-400 mb-4">
+                      <p className="text-slate-400 mb-4 cursor-default">
                         {project.description}
                       </p>
                       <div className="flex gap-2 mb-4">
                         {project.category && (
-                          <span className="px-3 py-1 text-xs font-semibold text-blue-300 bg-blue-900/30 rounded-full">
+                          <span className="px-3 py-1 text-xs font-semibold text-blue-300 bg-blue-900/30 rounded-full cursor-default">
                             {project.category}
                           </span>
                         )}
                         {project.language && (
-                          <span className="px-3 py-1 text-xs font-semibold text-purple-300 bg-purple-900/30 rounded-full">
+                          <span className="px-3 py-1 text-xs font-semibold text-purple-300 bg-purple-900/30 rounded-full cursor-default">
                             {project.language}
                           </span>
                         )}
                       </div>
                       {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                        <RippleButton
+                          type="button"
+                          variant="default"
+                          className="mt-1 bg-black text-white hover:bg-black/80 cursor-pointer"
+                          onClick={() => {
+                            window.open(
+                              project.link as string,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
                         >
                           <FaExternalLinkAlt size={16} />
                           Visit Project
-                        </a>
+                        </RippleButton>
                       )}
                     </div>
                   </div>
@@ -249,11 +239,11 @@ export default function Projects() {
               </div>
             ) : (
               <div className="text-center py-12">
-                <p className="text-slate-300 text-xl">
+                <p className="text-slate-300 text-xl cursor-default">
                   {projects.length === 0 ? "No projects available." : "No projects match your filters."}
                 </p>
                 {projects.length === 0 && (
-                  <p className="text-slate-400">Check the API or database seeding.</p>
+                  <p className="text-slate-400 cursor-default">Check the API or database seeding.</p>
                 )}
               </div>
             )}
@@ -261,7 +251,7 @@ export default function Projects() {
             {/* Contact icons below projects, matching home page */}
             <div className="text-center pt-[30px] pb-[30px]">
               <div className="inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
-                <div className="text-slate-100 italic text-4xl text-center mb-3">
+                <div className="text-slate-100 italic text-4xl text-center mb-3 cursor-default">
                   Keep in Touch
                 </div>
                 <div className="flex items-center justify-center gap-6">

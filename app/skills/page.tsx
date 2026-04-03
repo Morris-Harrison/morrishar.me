@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaNode, FaEnvelope, FaGithub } from "react-icons/fa";
-import { SiDjango, SiPostgresql, SiMongodb } from "react-icons/si";
+import { SiDjango } from "react-icons/si";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { LightWavesBackground } from "../components/LightWavesBackground";
@@ -8,52 +9,53 @@ import { LightWavesBackground } from "../components/LightWavesBackground";
 export default function Skills() {
   const languages = [
     { 
-      name: "Python", 
-      icon: "/python-svgrepo-com.svg",
-      description: "Data processing, scripting, and backend development",
-      proficiency: "Advanced",
-      frameworks: [
-        { name: "Django", icon: SiDjango },
-        { name: "PostgreSQL", icon: SiPostgresql },
-        { name: "CustomTkinter", icon: SiPostgresql },
-        { name: "Numpy", icon: SiPostgresql },
-        { name: "PyGame", icon: SiPostgresql },
-      ]
-    },
-    { 
       name: "JavaScript", 
       icon: "/js-svgrepo-com.svg",
-      description: "Interactive frontend experiences and web applications",
-      proficiency: "Advanced",
+      description: "Interactive UI's, Clean UX, and Full Stack Applications",
       frameworks: [
-        { name: "React", icon: "/react.svg" },
-        { name: "Next.js", icon: "/next.svg" },
-        { name: "Tailwind", icon: "/tailwind-css.svg" },
-        { name: "Three JS", icon: "/tailwind-css.svg" },
-        { name: "express", icon: "/tailwind-css.svg" },
-        { name: "electron", icon: "/tailwind-css.svg" },
-        { name: "shadcn", icon: "/tailwind-css.svg" },
+        { name: "React", icon: "/react-svgrepo-com.svg" },
+        { name: "Next", icon: "/next.svg" },
+        { name: "Node", icon: "/node.svg" },
+        { name: "Express", icon: "/express.svg" }, 
+        { name: "Three JS", icon: "/threejs-logo.svg" },
+        { name: "Vite", icon: "/vite.svg" },
+        { name: "shadcn", icon: "/shadcn.svg" },
+        { name: "Tailwind", icon: "/tailwind-svgrepo-com.svg" },
+        { name: "Prisma", icon: "/light-prisma-svgrepo-com.svg" },
       ]
     },
     { 
       name: "TypeScript", 
       icon: "/typescript-logo-svgrepo-com.svg",
-      description: "Type-safe development for scalable applications",
-      proficiency: "Advanced",
+      description: "Type-Safe, Scalable Web Applications",
       frameworks: [
-        { name: "Node.js", icon: FaNode },
-        { name: "MongoDB", icon: SiMongodb },
-        { name: "Prisma", icon: "/prisma-svgrepo-com.svg" },
+        { name: "Next", icon: "/next.svg" },
+        { name: "Angular", icon: "/angular-svgrepo-com.svg" },
+        { name: "T3", icon: "/t3.svg" },
+        { name: "Electron", icon: "/electron-svgrepo-com.svg" },
+        { name: "Sprunk", icon: "/sprunk.svg" },
         { name: "Socket.io", icon: "/socketio_logo_icon_169741.svg" },
-        { name: "MySQL", icon: "/mysql-2.svg" },
+      ]
+    },
+    { 
+      name: "Python", 
+      icon: "/python-svgrepo-com.svg",
+      description: "Backend Development, Desktop Applications, and Data Science",
+      frameworks: [
+        { name: "Django", icon:"/django-svgrepo-com.svg" },
+        { name: "Flask", icon: "/flask-svgrepo-com.svg" },
+        { name: "CustomTkinter", icon: "/ctk.svg" },
+        { name: "PyGame", icon: "/Pygame_logo.svg" },
+        { name: "Selenium", icon: "/selenium-svgrepo-com.svg" },
+        { name: "Numpy", icon: "/numpy-svgrepo-com.svg" },
+        { name: "TensorFlow", icon: "/tensor.svg" },
       ]
     },
   ];
 
   const databases = [
-    { name: "PostgreSQL", icon: SiPostgresql },
-    { name: "MongoDB", icon: SiMongodb },
-    { name: "MySQL", icon: "/mysql-2.svg" },
+    { name: "MongoDB", icon: "/mongo-svgrepo-com.svg" },
+    { name: "MySQL", icon: "/mysql-svgrepo-com.svg" },
   ];
 
   const tools = [
@@ -131,42 +133,85 @@ export default function Skills() {
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {lang.name}
                   </h3>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-slate-300 font-semibold">
-                      Proficiency
-                    </span>
-                    <span className="text-sm text-slate-300">
-                      {lang.proficiency}
-                    </span>
-                  </div>
                   <p className="text-slate-400 mb-4">
                     {lang.description}
                   </p>
                   <div className="border-t border-slate-700 pt-4">
                     <p className="text-xs text-slate-500 font-semibold mb-3">FRAMEWORKS & LIBRARIES</p>
-                    <div className="space-y-2">
-                      {lang.frameworks.map((fw) => {
-                        const Icon = typeof fw.icon === 'function' ? fw.icon : null;
-                        return (
-                          <div key={fw.name} className="flex items-center gap-2">
-                            {Icon ? (
-                              <Icon className="w-4 h-4 text-white flex-shrink-0" />
-                            ) : (
-                              <div className="w-4 h-4 flex-shrink-0">
-                                <Image 
-                                  src={fw.icon as string} 
-                                  alt={fw.name}
-                                  width={16}
-                                  height={16}
-                                  className="w-full h-full object-contain invert"
-                                />
+                    {lang.name === "JavaScript" ? (
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                        <div className="space-y-2">
+                          {lang.frameworks.slice(0, 7).map((fw) => {
+                            const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                            return (
+                              <div key={fw.name} className="flex items-center gap-2">
+                                {Icon ? (
+                                  <Icon className="w-4 h-4 text-white flex-shrink-0" />
+                                ) : (
+                                  <div className="w-4 h-4 flex-shrink-0">
+                                    <Image
+                                      src={fw.icon as string}
+                                      alt={fw.name}
+                                      width={16}
+                                      height={16}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  </div>
+                                )}
+                                <span className="text-sm text-slate-300 cursor-default">{fw.name}</span>
                               </div>
-                            )}
-                            <span className="text-sm text-slate-300">{fw.name}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
+                            );
+                          })}
+                        </div>
+                        <div className="space-y-2">
+                          {lang.frameworks.slice(7).map((fw) => {
+                            const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                            return (
+                              <div key={fw.name} className="flex items-center gap-2">
+                                {Icon ? (
+                                  <Icon className="w-4 h-4 text-white flex-shrink-0" />
+                                ) : (
+                                  <div className="w-4 h-4 flex-shrink-0">
+                                    <Image
+                                      src={fw.icon as string}
+                                      alt={fw.name}
+                                      width={16}
+                                      height={16}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  </div>
+                                )}
+                                <span className="text-sm text-slate-300 cursor-default">{fw.name}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        {lang.frameworks.map((fw) => {
+                          const Icon = typeof fw.icon === "function" ? fw.icon : null;
+                          return (
+                            <div key={fw.name} className="flex items-center gap-2">
+                              {Icon ? (
+                                <Icon className="w-4 h-4 text-white flex-shrink-0" />
+                              ) : (
+                                <div className="w-4 h-4 flex-shrink-0">
+                                  <Image
+                                    src={fw.icon as string}
+                                    alt={fw.name}
+                                    width={16}
+                                    height={16}
+                                    className="w-full h-full object-contain"
+                                  />
+                                </div>
+                              )}
+                              <span className="text-sm text-slate-300 cursor-default">{fw.name}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -179,7 +224,7 @@ export default function Skills() {
           <div className="max-w-4xl mx-auto w-full">
             <h2 className="text-5xl font-bold text-white mb-8">Databases</h2>
             <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-              <div className="grid grid-cols-3 gap-8 mb-6">
+              <div className="grid grid-cols-2 gap-8 mb-6 max-w-md mx-auto">
                 {databases.map((db) => {
                   const Icon = typeof db.icon === "function" ? db.icon : null;
                   return (
@@ -193,17 +238,17 @@ export default function Skills() {
                             alt={db.name}
                             width={48}
                             height={48}
-                            className="w-full h-full object-contain invert"
+                            className="w-full h-full object-contain"
                           />
                         )}
                       </div>
-                      <span className="text-sm text-slate-300 text-center">{db.name}</span>
+                      <span className="text-sm text-slate-300 text-center cursor-default">{db.name}</span>
                     </div>
                   );
                 })}
               </div>
-              <p className="text-slate-400 text-lg leading-relaxed">
-                Production-ready experience with relational and document databases, including schema design, indexing, and query optimization.
+              <p className="text-slate-400 text-lg leading-relaxed text-center">
+                No-SQL Databases through MongoDB Atlas, often occompanied by Prisma, and MySQL Databases via HeidiSQL
               </p>
             </div>
           </div>
@@ -230,7 +275,7 @@ export default function Skills() {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <span className="text-sm text-slate-300 text-center">{tool.name}</span>
+                      <span className="text-sm text-slate-300 text-center cursor-default">{tool.name}</span>
                     </div>
                   ))}
                 </div>
@@ -253,7 +298,7 @@ export default function Skills() {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <span className="text-sm text-slate-300 text-center">{service.name}</span>
+                      <span className="text-sm text-slate-300 text-center cursor-default">{service.name}</span>
                     </div>
                   ))}
                 </div>
@@ -276,7 +321,7 @@ export default function Skills() {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <span className="text-sm text-slate-300 text-center">{service.name}</span>
+                      <span className="text-sm text-slate-300 text-center cursor-default">{service.name}</span>
                     </div>
                   ))}
                 </div>
@@ -304,7 +349,7 @@ export default function Skills() {
                           }`}
                         />
                       </div>
-                      <span className="text-sm text-slate-300 text-center">{agent.name}</span>
+                      <span className="text-sm text-slate-300 text-center cursor-default">{agent.name}</span>
                     </div>
                   ))}
                 </div>
@@ -313,18 +358,25 @@ export default function Skills() {
                 </p>
                 </div>
               </div>
+              <h2 className="text-5xl font-bold text-white mb-8">Soft Skills</h2>
               <div className="bg-slate-800 border border-slate-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Soft Skills</h3>
                 <ul className="list-disc list-inside text-slate-300 text-lg mb-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                  <li>Problem-solving and analytical thinking</li>
-                  <li>Clear communication with technical and non-technical stakeholders</li>
-                  <li>Collaborative teamwork and pair programming</li>
-                  <li>Project ownership and time management</li>
-                  <li>Thoughtful code review and mentorship</li>
-                  <li>Continuous learning and self-improvement</li>
+                  <li>Problem-Solving; Pattern Recognition and Research</li>
+                  <li>Patient; Enjoys Courses and Studying</li>
+                  <li>Communication and Teamwork</li>
+                  <li>Continuous Learning and Self-Improvement</li>
                 </ul>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  Together, these skills help me ship reliable software, work well with diverse teams, and keep improving as a developer.
+                <p className="text-slate-400 text-lg leading-relaxed text-center">
+                  My Passion as a Developer Drives Me to Create{' '}
+                  <Link
+                    href="/projects"
+                    className="text-blue-400 hover:text-blue-300"
+                  >
+                    Projects
+                  </Link>{' '}
+                  that I'm Proud of Each Year. 
+                  <br>
+                  </br>I am Available for Freelance work any time, contact below!
                 </p>
               </div>
             </div>
@@ -336,7 +388,7 @@ export default function Skills() {
           <div className="max-w-4xl mx-auto w-full">
             <div className="text-center">
               <div className="inline-block mt-[60px] mb-[30px] rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
-                <div className="text-slate-100 italic text-4xl text-center mb-3">
+                <div className="text-slate-100 italic text-4xl text-center mb-3 cursor-default">
                   Keep in Touch
                 </div>
                 <div className="flex items-center justify-center gap-6">

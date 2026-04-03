@@ -12,7 +12,7 @@ export default function Footer({
   return (
     <footer className="bg-black border-t border-white mt-8">
       <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-center">
-        <p className="text-white text-sm">
+        <p className="text-white text-sm cursor-default">
           2026 Morris Harrison
         </p>
       </div>

@@ -333,7 +333,7 @@ export default function Home() {
 
             {/* Contact icons below featured projects */}
             <div className="mt-6 mb-[20px] inline-block rounded-xl px-6 py-4 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/90 to-black/40">
-              <div className="text-slate-100 italic text-4xl text-center mb-3">
+              <div className="text-slate-100 italic text-4xl text-center mb-3 cursor-default">
                 Keep in Touch
               </div>
               <div className="flex items-center justify-center gap-6">
