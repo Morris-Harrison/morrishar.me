@@ -389,7 +389,7 @@ export default function Skills() {
                   </Link>{' '}
                   that I'm Proud of Each Year. 
                   <br>
-                  </br>I am Available for Freelance work any time, contact below!
+                  </br>I am Available for Freelance Work Any Time, Contact Below!
                 </p>
               </div>
             </div>
