@@ -32,7 +32,7 @@ const SUBTITLE_SPEED = 16;
 const ABOUT_BODY_SPEED = 20;
 
 const SUBTITLE_TEXT =
-  "A Software Developer from Nanaimo BC Specializing" +
+  "A Software Developer from British Columbia Specializing" +
   "\n" +
   "in IT Infrastructure and Personalized Websites.";
 
