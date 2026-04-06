@@ -273,7 +273,7 @@ function HomeContent() {
           </div>
         </section>
 
-        <section className="px-2 sm:px-4 pt-4 pb-16 -mt-10 md:-mt-16">
+        <section className="px-2 sm:px-4 pt-4 pb-16 -mt-16 md:-mt-16">
           <div className="max-w-3xl mx-auto w-full">
             <div className="inline-block w-full space-y-4 rounded-xl px-2 sm:px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/95 to-black/40 min-h-[130px] overflow-visible">
               <div className="text-base xs:text-lg md:text-xl text-slate-100 text-left break-words">
