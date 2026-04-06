@@ -223,12 +223,12 @@ function HomeContent() {
       <BackgroundPaths />
       <div className="relative z-10 bg-transparent w-full">
         <Navbar />
-        <section className="px-6 py-16 min-h-[80vh] flex items-center">
+        <section className="px-2 sm:px-4 py-10 min-h-[80vh] flex items-center">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-2/3">
-                <div className="w-full max-w-5xl rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
-                  <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 flex items-baseline gap-2 whitespace-nowrap">
+                <div className="w-full max-w-5xl rounded-xl px-2 sm:px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/10 via-black/90 to-black/10">
+                  <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 flex items-baseline gap-2 break-words">
                     {fromNav ? (
                       <>
                         <span>Hi, I'm Morris</span>
@@ -236,12 +236,14 @@ function HomeContent() {
                       </>
                     ) : (
                       <>
-                        <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />
+                        <span className="block min-w-0 max-w-full overflow-hidden text-ellipsis break-words">
+                          <Typewriter text="Hi, I'm Morris" typeSpeed={TITLE_SPEED} cursor={false} />
+                        </span>
                         <span className={titleDone ? "cursor-blink-slow" : "cursor-blink-fast"}>_</span>
                       </>
                     )}
                   </h1>
-                  <div className="text-xl md:text-2xl text-slate-200 max-w-none whitespace-pre-line min-h-[4.5rem]">
+                  <div className="text-base xs:text-lg md:text-2xl text-slate-200 max-w-none whitespace-pre-line min-h-[4.5rem] break-words">
                     {fromNav
                       ? SUBTITLE_TEXT
                       : titleDone && (
@@ -271,12 +273,12 @@ function HomeContent() {
           </div>
         </section>
 
-        <section className="px-6 pt-4 pb-16 -mt-10 md:-mt-16">
+        <section className="px-2 sm:px-4 pt-4 pb-16 -mt-10 md:-mt-16">
           <div className="max-w-3xl mx-auto w-full">
-            <div className="inline-block w-full space-y-4 rounded-xl px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/95 to-black/40 h-[130px] overflow-hidden">
-              <div className="text-lg md:text-xl text-slate-100 text-left">
+            <div className="inline-block w-full space-y-4 rounded-xl px-2 sm:px-6 py-5 shadow-md shadow-black/40 bg-gradient-to-r from-black/40 via-black/95 to-black/40 min-h-[130px] overflow-visible">
+              <div className="text-base xs:text-lg md:text-xl text-slate-100 text-left break-words">
                 {(subtitleDone || fromNav) && (
-                  <p>{renderAboutTyped(fromNav ? ABOUT_TOTAL_LENGTH : aboutChars)}</p>
+                  <p className="break-words whitespace-pre-line w-full">{renderAboutTyped(fromNav ? ABOUT_TOTAL_LENGTH : aboutChars)}</p>
                 )}
               </div>
             </div>
