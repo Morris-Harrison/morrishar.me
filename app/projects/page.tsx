@@ -75,7 +75,7 @@ export default function Projects() {
           <div className="max-w-4xl mx-auto w-full">
             <h2 className="text-5xl font-bold text-white mb-2">{headingTitle}</h2>
             <p className="text-slate-400 text-lg mb-10 cursor-default">
-              All of my Projects are Open-Source Live Websites or Applications Available for Download.
+              All of my Projects are Live Websites or Applications Available for Download.
             </p>
             
             {/* Filter Buttons */}

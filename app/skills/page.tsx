@@ -367,7 +367,7 @@ export default function Skills() {
                   ))}
                 </div>
                 <p className="text-slate-400 text-lg leading-relaxed">
-                  Advanced AI Manipulation with Premium Agents provided by GitHub Education including Claude 5, Perplexity 5, and GPT 5, as well as offline AI through Ollama.
+                  Advanced AI Manipulation with Premium Agents provided by GitHub Education including Claude Sonnet, Perplexity Sonar, and GPT 5, as well as offline AI through Ollama.
                 </p>
                 </div>
               </div>
