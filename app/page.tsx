@@ -256,7 +256,7 @@ function HomeContent() {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-1/3 flex justify-center md:justify-start">
+              <div className="w-full md:w-1/3 flex justify-center md:justify-start mt-[-20px] md:mt-0">
                 <div className="relative w-64 h-64 md:w-80 md:h-80">
                   <Image
                     src="/mkh.jpg"
